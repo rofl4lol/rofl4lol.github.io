@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title>RoFL 4 LoL</title>
+
+    <link rel="stylesheet" href="rofl.css" type="text/css" />
+
+    <script src="js/knockout-3.3.0.js"></script>
+    <script data-main="js/init" src="js/require.js"></script>
+</head>
+
+<body>
+	<h1>RoFL 4 LoL</h1>
+
+    <div id="login">
+        <div id="userList"></div>
+        <form data-bind="submit: Submit">
+            Summoner
+            <select data-bind="options: RegionList, value: RegionSelected, enable: Enabled"></select>
+            <input type="text" data-bind="textInput: SummonerName, enable: Enabled" />
+
+            <br />API Key <input type="text" data-bind="textInput: ApiKey, enable: Enabled" style="width: 200px" />
+            <br /><button type="submit" data-bind="enable: Enabled">Submit</button>
+        </form>
+    </div>
+
+    <div id="content" style="display: none">
+        <p>Refresh Interval: <!-- ko text: (TotalRequests() * 1.25) --><!-- /ko --> seconds</p>
+
+        <div id="StatusTable" data-bind="with: User">
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" data-bind="checked: _refreshAllEnabled" /></th>
+                        <th>Rg</th>
+                        <th>Name</th>
+                        <th>Last seen</th>
+                        <th>Current Game</th>
+                        <th>x</th>
+                    </tr>
+                </thead>
+
+                <tbody data-bind="foreach: Friends">
+                    <tr>
+                        <td><input type="checkbox" data-bind="checked: RefreshEnabled" /></td>
+                        <td data-bind="text: Region.toUpperCase()"></td>
+                        <td data-bind="text: Name"></td>
+                        <td data-bind="text: LastModifiedAgo() + ' at ' + LastModifiedDate()"></td>
+                        <td>
+                            <button data-bind="click: function SpectateCommandClick(){$parent.PromptSpectateCommand($data)}, visible: CurrGame.Spectatable">S</button>
+                            <span data-bind="text: CurrentGameMessage"></span>
+                        </td>
+                        <td><a href="javascript:;" data-bind="click: $parent.RemoveFriend.bind($parent, $data)">[X]</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="AddSummoner" data-bind="with: AddSummoner">
+            <form data-bind="submit: Submit">
+                <select data-bind="options: RegionList, value: RegionSelected"></select>
+                <input type="text" data-bind="textInput: InputText" id="AddSummonerInput" />
+                <button type="submit">Add Summoner</button>
+            </form>
+        </div>
+
+        <pre style="display:none;" data-bind="text: ko.toJSON($data, null, 2)"></pre>
+
+    </div>
+</body>
+</html>

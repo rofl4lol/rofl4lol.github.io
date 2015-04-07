@@ -1,0 +1,39 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#content {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f4f4f4;
+}
+
+th {
+    text-align: left;
+}
+
+td,
+th {
+    background-color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.userLoginButton {
+    color: black;
+    border: 1px solid;
+    display: inline-block;
+    margin: 3px;
+    padding: 4px;
+    width: 200px;
+    text-align: center;
+}

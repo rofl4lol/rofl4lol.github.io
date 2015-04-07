@@ -1,0 +1,1 @@
+/* Interfaces for Riot API returned objects ONLY */
