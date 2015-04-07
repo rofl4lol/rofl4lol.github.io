@@ -32,7 +32,7 @@ class User {
 
         this.SummonerName = name;
         this.Region = region;
-        this.Friends = ko.observableArray([]);
+        this.Friends = ko.observableArray<Summoner>([]);
         this._spectatorPath = "";
         this._batchedRequestsForSummonerStatus = [];
 
@@ -47,12 +47,14 @@ class User {
         });
 
         // load saved friends
-        var savedFriendsRaw = localStorage.getItem(this._storedFriendsKey);
-        if (!!savedFriendsRaw) {
-            var savedFriends: Array<IFriendsInternal> = JSON.parse(savedFriendsRaw);
-            savedFriends.forEach(function UserCtorSavedFriendsForEach(f: IFriendsInternal) {
-                self.AddFriend(f.Name, f.Region);
-            });
+        if (!!localStorage) {
+            var savedFriendsRaw = localStorage.getItem(this._storedFriendsKey);
+            if (!!savedFriendsRaw) {
+                var savedFriends: Array<IFriendsInternal> = JSON.parse(savedFriendsRaw);
+                savedFriends.forEach(function UserCtorSavedFriendsForEach(f: IFriendsInternal) {
+                    self.AddFriend(f.Name, f.Region);
+                });
+            }
         }
 
         if (this.Friends().length == 0) // aw so sad

@@ -25,6 +25,8 @@
             <br />API Key <input type="text" data-bind="textInput: ApiKey, enable: Enabled" style="width: 200px" />
             <br /><button type="submit" data-bind="enable: Enabled">Submit</button>
         </form>
+
+        <p>Get API key at: <a href="https://developer.riotgames.com/">https://developer.riotgames.com/</a></p>
     </div>
 
     <div id="content" style="display: none">
@@ -54,6 +56,7 @@
                             <span data-bind="text: CurrentGameMessage"></span>
                         </td>
                         <td><a href="javascript:;" data-bind="click: $parent.RemoveFriend.bind($parent, $data)">[X]</a></td>
+                        <td><pre data-bind="text: ko.toJSON($data, null, 2)"></pre></td>
                     </tr>
                 </tbody>
             </table>

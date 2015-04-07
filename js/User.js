@@ -16,12 +16,14 @@ define(["require", "exports", "Summoner", "Request"], function (require, exports
                 });
             });
             // load saved friends
-            var savedFriendsRaw = localStorage.getItem(this._storedFriendsKey);
-            if (!!savedFriendsRaw) {
-                var savedFriends = JSON.parse(savedFriendsRaw);
-                savedFriends.forEach(function UserCtorSavedFriendsForEach(f) {
-                    self.AddFriend(f.Name, f.Region);
-                });
+            if (!!localStorage) {
+                var savedFriendsRaw = localStorage.getItem(this._storedFriendsKey);
+                if (!!savedFriendsRaw) {
+                    var savedFriends = JSON.parse(savedFriendsRaw);
+                    savedFriends.forEach(function UserCtorSavedFriendsForEach(f) {
+                        self.AddFriend(f.Name, f.Region);
+                    });
+                }
             }
             if (this.Friends().length == 0)
                 this.AddFriend(self.SummonerName, self.Region);
